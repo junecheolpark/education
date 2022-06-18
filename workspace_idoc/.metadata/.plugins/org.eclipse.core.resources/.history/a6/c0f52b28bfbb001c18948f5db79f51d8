@@ -1,0 +1,40 @@
+package com.kh.fb;
+
+public class CommentDTO {
+   private String Com;
+   private String nickname;
+   private String Reporing_date;
+   
+   
+   public CommentDTO() {}
+   public CommentDTO(String com, String nickname, String reporing_date) {
+      super();
+      Com = com;
+      this.nickname = nickname;
+      Reporing_date = reporing_date;
+   }
+   public String getCom() {
+      return Com;
+   }
+   public void setCom(String com) {
+      Com = com;
+   }
+   public String getNickname() {
+      return nickname;
+   }
+   public void setNickname(String nickname) {
+      this.nickname = nickname;
+   }
+   public String getReporing_date() {
+      return Reporing_date;
+   }
+   public void setReporing_date(String reporing_date) {
+      Reporing_date = reporing_date;
+   }
+   @Override
+   public String toString() {
+      return Com + "\t" + nickname + "\t" + Reporing_date;
+   }
+   
+   
+}

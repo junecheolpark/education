@@ -1,0 +1,30 @@
+package Run;
+
+import java.util.Scanner;
+
+public class Client {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("==== 메뉴 선택 ====\r\n" + "1. 로그인\r\n" + "2. 회원가입\r\n" + "0. 프로그램 종료\r\n" + ">> ");
+		int menu = Integer.parseInt(sc.nextLine());
+		
+		
+		while(true) {
+			if(menu == 1) {//로그인
+				System.out.print("==== 회원가입 ====\nID : ");
+				String id = sc.nextLine();
+				System.out.print("PW : ");
+				String pw = sc.nextLine();
+				System.out.print("NICKNAME : ");
+				String nickname = sc.nextLine();
+				
+			}else if(menu == 2) {//회원가입
+				
+			}else if(menu == 0) {//프로그램종료
+				break;
+			}
+		}
+		
+	}
+}

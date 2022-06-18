@@ -1,0 +1,245 @@
+package com.kh.fb;
+
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+
+import org.apache.commons.dbcp2.BasicDataSource;
+
+
+
+
+
+public class FacebookDAO {
+	private BasicDataSource bds = new BasicDataSource();
+	private static FacebookDAO instance = null;
+	
+	private FacebookDAO() { //카페 생성자 private 설정
+		bds.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
+		bds.setUsername("kh");
+		bds.setPassword("kh");
+		bds.setInitialSize(10);
+	}
+	
+	public static FacebookDAO getInstance() {//CafeDAO 인스턴스를 내부적으로 new 하고 반환하는 매서드
+		if(instance == null) {
+			instance = new FacebookDAO();
+		}
+		return instance;
+	}
+	
+	public Connection getConnection() throws Exception{
+		return bds.getConnection();
+	}
+	//--------------------------------------------------------------------------
+	
+	public boolean Login(String Id, String Pw) throws Exception {//로그인 혜원
+	    String sql = "select * from Facebook_MB where Id = ? and Pw = ?";
+
+	    try (Connection con = this.getConnection(); 
+	          PreparedStatement pstmt = con.prepareStatement(sql)) {
+
+	       pstmt.setString(1, Id);
+	       pstmt.setString(2, Pw);
+	       ResultSet rs = pstmt.executeQuery();
+
+	       if (rs.next()) {
+	          return true;
+	       }
+	       return false;
+	    }
+	 }
+	public String getNickname(String Id) throws Exception {
+	      String sql = "select nickname from Facebook_MB where Id = ?";
+
+	      try (Connection con = this.getConnection(); 
+	            PreparedStatement pstmt = con.prepareStatement(sql)) {
+
+	         pstmt.setString(1, Id);
+	         ResultSet rs = pstmt.executeQuery();
+
+	         if (rs.next()) {
+	            return rs.getString(1);
+	         }
+	         return null;
+	      }
+	   }
+	 // 회원가입
+	   public int Id_join(FacebookDTO dto) throws Exception {
+	      String sql = "insert into Facebook_MB values(?,?,?)";
+	      try (Connection con = this.getConnection(); 
+	            PreparedStatement pstmt = con.prepareStatement(sql);) {
+
+	         pstmt.setString(1, dto.getId());
+	         pstmt.setString(2, dto.getPw());
+	         pstmt.setString(3, dto.getNickname());
+
+	         int rs = pstmt.executeUpdate();
+	         return rs;
+	      }
+	   }
+	   
+	   
+	 //---------------------------------------------------------------------- 승윤
+	   public boolean check_id(String id) throws Exception{
+		      String sql = "select * from Facebook_MB where id = ?";
+		      try(Connection con = this.getConnection();
+		         PreparedStatement pstmt = con.prepareStatement(sql);){
+		         
+		         pstmt.setString(1, id);
+		         ResultSet rs = pstmt.executeQuery();
+		         
+		         if(rs.next()) { // 중복된 아이디가 있음
+		            return false; // 사용불가 아이디 false 리턴
+		         }
+		         return true; //   사용할 수 있는 아이디일 경우 true 리턴
+		      }      
+		   }
+
+		   public boolean check_nickname(String nickname) throws Exception{
+		      String sql = "select * from Facebook_MB where nickname = ?";
+		      try(Connection con = this.getConnection();
+		         PreparedStatement pstmt = con.prepareStatement(sql);){
+		         
+		         pstmt.setString(3, nickname);
+		         ResultSet rs = pstmt.executeQuery();
+		         
+		         if(rs.next()) { // 중복된 닉네임이 있음
+		            return false; // 사용불가 닉네임 false 리턴
+		         }
+		         return true; //   사용할 수 있는 닉네임일 경우 true 리턴
+		      }      
+		   }
+	//----------------------------------------------------------------------
+	   public int insert(PostDTO dto) throws Exception{//호준
+		      
+		      String sql ="insert into Post values(seq_pno.nextval,?,?,?,?)";
+		      try(Connection con = this.getConnection();
+		         PreparedStatement pstmt = con.prepareStatement(sql);){
+		         
+		         pstmt.setString(1, dto.getTitle());
+		         pstmt.setString(2, dto.getNickname());
+		         pstmt.setString(3, dto.getRegister_date());
+		         pstmt.setString(4, dto.getMemo());
+		         
+		         int rs = pstmt.executeUpdate();
+		         return rs;
+		      }
+		   }
+		   
+		   public ArrayList<PostDTO> selectAll() throws Exception{
+		      
+		      String sql = "select * from Post";
+		      
+		      try(Connection con = this.getConnection();
+		         PreparedStatement pstmt = con.prepareStatement(sql);){
+		         
+		         ResultSet rs = pstmt.executeQuery();
+		         ArrayList<PostDTO> list = new ArrayList<>();
+		         
+		         while(rs.next()) {
+		            int no = rs.getInt(1);
+		            String title = rs.getString(2);
+		            String nickname = rs.getString(3);
+		            String register_date = parseDate(rs.getDate(4));
+		            String memo = rs.getString(5);
+		            
+		            list.add(new PostDTO(no,title,nickname,register_date, memo));
+		         }
+		         return list;
+		      }
+		   }
+		   
+		 //----------------------------------------------------------------------
+		   //번호받아서 하나 출력 예원
+		   public PostDTO select(int pno) throws Exception {
+		      String sql = "select * from Post where no = ?";
+		      try (Connection con = getConnection(); PreparedStatement pstmt = con.prepareStatement(sql)) {
+
+		         pstmt.setInt(1, pno);
+
+		         ResultSet rs = pstmt.executeQuery();
+		         if (rs.next()) {
+		            int no = rs.getInt(1);
+		            String nickname = rs.getString(2);
+		            String register_date = parseDate(rs.getDate(3));
+		            String title = rs.getString(4);
+		            String memo = rs.getString(5);
+
+		            PostDTO dto = new PostDTO(no, nickname, title, register_date, memo);
+		            return dto;
+		         }
+		         return null;
+		      }
+		   }
+		   //업데이트
+		   public int update(PostDTO dto) throws Exception {
+
+		      String sql = "update Post set title = ?, memo = ? where no = ?";
+
+		      try (Connection con = getConnection(); PreparedStatement pstmt = con.prepareStatement(sql);) {
+
+		         pstmt.setString(1, dto.getTitle());
+		         pstmt.setString(2, dto.getMemo());
+		         pstmt.setInt(3, dto.getNo());
+
+		         int rs = pstmt.executeUpdate();
+		         return rs;
+		      }
+		   }
+		 //---------------------------------------------------------------------- 용진
+		   public int delete(int no, String nickname) throws Exception { // 포스트 삭제
+			      String sql = "delete from post where no= ? and nickname = ?";
+			      
+			      try(Connection con = this.getConnection();
+			         PreparedStatement pstmt = con.prepareStatement(sql);){
+			         
+			         pstmt.setInt(1, no);
+			         pstmt.setString(2, nickname);
+			         int rs = pstmt.executeUpdate();
+			         return rs;
+			      }
+			      
+			   }
+			   public int insert_C(int no, String com, String nickname) throws Exception{ //덧글 추가
+			      String sql = "insert into post_com values(?,?,?,sysdate)";
+			      try(Connection con = this.getConnection();
+			         PreparedStatement pstmt = con.prepareStatement(sql);){
+			         
+			         pstmt.setInt(1, no);
+			         pstmt.setString(2, com);
+			         pstmt.setString(3, nickname);
+			         int rs = pstmt.executeUpdate();
+			         return rs;
+			      }
+			   }
+		 //---------------------------------------------------------------------- 준철
+	public ArrayList<CommentDTO> selectAll_c() throws Exception { // 댓글 목록
+		String sql = "select * from post_com";
+		try (Connection con = this.getConnection();
+				PreparedStatement stmt = con.prepareStatement(sql);) {
+			
+			ResultSet rs = stmt.executeQuery();
+			ArrayList<CommentDTO> list = new ArrayList<>();
+			while (rs.next()) {
+				String Com = rs.getString(2);
+				String Nickname = rs.getString(3);
+				String Reporing_date = parseDate(rs.getDate(4));
+				int no = rs.getInt(1);
+				list.add(new CommentDTO(no, Com, Nickname, Reporing_date ));
+			}
+			return list;
+		}
+	}
+	
+	public String parseDate(Date date) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd HH:mm:ss");
+		String date_str = sdf.format(date);
+		return date_str;
+	}
+}
+
+

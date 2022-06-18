@@ -1,0 +1,56 @@
+package com.kh.date02;
+
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class MemberDTO {
+private String id;
+private String pw;
+private Date birth_date;
+
+public MemberDTO() {}
+public MemberDTO(String id, String pw, String birth_date) {
+	super();
+	this.id = id;
+	this.pw = pw;
+	//데이터타입 불일치 에러
+	this.birth_date = toDateFormat(birth_date);
+}
+public Date toDateFormat(String date) {
+	// String -> sql.Date 변환하려는 원본데이터 (String)에 맞춰 형식을 잡아줌.
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+	try {
+		return sdf.parse(date);
+	}catch(Exception e) {
+		e.printStackTrace();
+	}
+	return null;
+}
+
+public String getId() {
+	return id;
+}
+public void setId(String id) {
+	this.id = id;
+}
+public String getPw() {
+	return pw;
+}
+public void setPw(String pw) {
+	this.pw = pw;
+}
+public Date getBirth_date() {
+	return birth_date;
+}
+public void setBirth_date(Date birth_date) {
+	this.birth_date = birth_date;
+}
+@Override
+public String toString() {
+	return "MemberDTO [id=" + id + ", pw=" + pw + ", birth_date=" + birth_date + "]";
+}
+
+
+
+}

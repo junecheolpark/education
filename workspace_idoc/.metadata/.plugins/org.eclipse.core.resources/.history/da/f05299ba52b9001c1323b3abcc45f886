@@ -1,0 +1,27 @@
+package com.kh.cafe;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class Select {
+	public static void main(String[] args) {
+
+		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String username = "kh";
+		String password = "kh";
+		try(Connection con = DriverManager.getConnection(url,username, password);
+				Statement stmt =con.createStatement();){
+			System.out.println("DB접속 성공");
+			// product_id 1번만 출력하기
+			String sql = "select * from cafe where product_id = 1";
+			// executeQury() 를 통해 반환받는 결과 -> ResultSet(질의결과)
+			ResultSet rs = stmt.executeQuery(sql);
+			System.out.println("rs: " + rs);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+}

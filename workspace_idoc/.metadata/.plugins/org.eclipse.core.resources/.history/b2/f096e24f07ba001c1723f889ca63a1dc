@@ -1,0 +1,24 @@
+package com.kh.student;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
+public class StudentDAO {
+private String url = "jdbc:oracle:thin:@localhost:1521:xe"; 
+private String username = "kh";
+private String password = "kh";
+
+public int insert(DTO dto)throws Exception {
+	String sql = "insert into tbl_student values(seq_std.nextval, ?, ?,to_date(?, 'yyyy,mm,dd'))";
+	try(Connection con = DriverManager.getConnection(url, username, password);
+			PreparedStatement pstmt = con.prepareStatement(sql);){
+		pstmt.setString(1,dto.getName());
+		pstmt.setString(2,dto.getPhone());
+		pstmt.setString(3, dto.getBirth());
+		int rs = pstmt.executeUpdate();
+		return rs;
+	}
+}
+
+}

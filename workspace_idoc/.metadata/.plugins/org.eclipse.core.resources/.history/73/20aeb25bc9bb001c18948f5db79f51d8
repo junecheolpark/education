@@ -1,0 +1,129 @@
+package com.kh.fb;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+
+
+public class test {
+	public static void main(String[] args) {
+		FacebookDAO dao = FacebookDAO.getInstance();
+		Scanner sc = new Scanner(System.in);
+		login: while(true) {
+			System.out.println("Facebook 프로그램");
+		      System.out.println("1. 로그인");
+		      System.out.println("2. 회원가입");
+		      System.out.println("0. 프로그램 종료");
+		      System.out.print(">> ");
+		      int menu = Integer.parseInt(sc.nextLine());
+		      if(menu==1) { //로그인
+		    	  while (true) {
+		               System.out.print("id 입력 >> ");
+		               String Id = sc.nextLine();
+		               System.out.print("pw 입력 >> ");
+		               String Pw = sc.nextLine();
+		               try {
+		                  if (dao.Login(Id, Pw)) {
+		                     String Nickname = dao.getNickname(Id);
+		                     System.out.println("로그인 성공");
+		                     System.out.println("*** " + Nickname + "님 환영합니다 ***\n");
+
+		                   //성공시
+		                     System.out.println("1. 포스트 등록");
+				               System.out.println("2. 포스트 목록");
+				               System.out.println("3. 포스트 확인");
+				               System.out.println("4. 포스트 수정");
+				               System.out.println("5. 포스트 삭제");
+				               System.out.println("6. 로그아웃");
+				               int pmenu = Integer.parseInt(sc.nextLine());
+				               
+				               if(pmenu==1) { //insert 
+				            	   System.out.println("=== 포스트 등록 ===");
+				                   System.out.print("타이틀(10자 이내) >> ");
+				                   String title = sc.nextLine();
+				                   System.out.print("내용(100자 이내) >> ");
+				                   String memo = sc.nextLine();
+				                   
+				                   PostDTO dto = new PostDTO(0, null, title, null,memo);
+				                   try {
+				       				
+				       				int rs = dao.insert(dto);
+				       				if (rs > 0) {
+				       					System.out.println("메뉴 등록 성공");
+				       				}else {
+				       					System.out.println("메뉴 등록 실패");
+				       				}
+				       			}catch(Exception e) {
+				       				e.printStackTrace();
+				       				System.out.println("DB접속이 불안정 합니다.");
+				       			}
+				               }
+				               
+				               
+		                  } else {
+		                     System.out.println("아이디 혹은 비밀번호가 일치하지 않습니다.\n");
+		                  }
+		               } catch (Exception e) {
+		                  e.printStackTrace();
+		                  System.out.println("오류가 발생하였습니다.\n");
+		               }
+		            }
+		      }else if(menu==2) { //회원가입
+		    	  while (true) {
+		               System.out.print("id 입력 >> ");
+		               String Id = sc.nextLine();
+		               System.out.println("사용가능한 아이디입니다.");
+
+		               System.out.print("pw 입력 >> ");
+		               String Pw = sc.nextLine();
+
+		               System.out.print("nickname 입력 >> ");
+		               String Nickname = sc.nextLine();
+		               System.out.println("사용가능한 닉네임입니다.");
+
+		               try {
+		                  int rs = dao.Id_join(new FacebookDTO(Id, Pw, Nickname));
+		                  if (rs > 0) {
+		                     System.out.println("회원가입에 성공하였습니다.\n");
+		                  } else {
+		                     System.out.println("회원가입에 실패하였습니다.\n");
+		                  }
+		               } catch (Exception e) {
+		                  e.printStackTrace();
+		                  System.out.println("오류가 발생하였습니다.\n");
+		               }
+		               break;
+		            }
+
+		      } else if(menu==0) { //프로그램 종료
+		         System.out.println("프로그램을 종료합니다.");
+		         break login;
+		      }else {
+		         System.out.println("번호를 다시 입력하세요");
+		      }
+		}
+			/*try {//selectAll_C
+				for(int i = 0; i < 10; i++) {
+					ArrayList<CommentDTO> list = dao.selectAll_c();
+					if (list != null) {
+						for(CommentDTO dto:list) {
+							System.out.println(dto.toString());
+						}
+					}else {
+						System.out.println("데이터 조회 실패");
+					}
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}*/
+		
+		 
+		
+		
+		
+		
+		
+		
+	}
+	
+}

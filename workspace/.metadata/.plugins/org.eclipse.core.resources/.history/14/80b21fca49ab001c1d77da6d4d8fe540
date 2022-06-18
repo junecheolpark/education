@@ -1,0 +1,14 @@
+package com.network.member;
+
+import java.util.ArrayList;
+
+//계정에 대한 저장소, 기능 클래스
+public class AcccountDAO {
+	private ArrayList<AccountDTO> list = new ArrayList<>();
+
+	public AccountDAO() {
+		list.add(new AccountDTO("abc123".concat("a5555"));
+		list.add(new AccountDTO("eee555".concat("a5555"));
+	}
+	
+}

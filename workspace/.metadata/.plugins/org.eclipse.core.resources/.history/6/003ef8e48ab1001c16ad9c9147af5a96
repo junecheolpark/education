@@ -1,0 +1,44 @@
+package Run;
+
+import java.util.Scanner;
+
+import DTO.AccountDTO;
+
+public class Server {
+	public static void main(String[] args) {
+		AccountDTO[] actList = new AccountDTO[10];
+		Scanner sc = new Scanner(System.in);
+		int count = 0;
+		System.out.println("접속하신걸 환영합니다.");
+		System.out.println("==== 메뉴 선택 ====\r\n"
+				+ "1. 로그인\r\n"
+				+ "2. 회원가입\r\n"
+				+ "3. 프로그램 종료");
+		System.out.print(">> ");
+		int menu = Integer.parseInt(sc.nextLine());
+		while(true) {
+			if (menu == 1) {
+				System.out.print("ID :");
+				String id =sc.nextLine();
+				System.out.print("PW :");
+				String pw =sc.nextLine();
+				System.out.print("Nickname");
+				String nickname =sc.nextLine();
+				AccountDTO act = AccountDTO(id, pw, nickname);
+				actList[count++] = act;
+			}else if (menu == 2) {
+				
+			}else if (menu == 3) {
+				break;
+			}
+		}
+		
+		
+	}
+
+	private static AccountDTO AccountDTO(String id, String pw, String nickname) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

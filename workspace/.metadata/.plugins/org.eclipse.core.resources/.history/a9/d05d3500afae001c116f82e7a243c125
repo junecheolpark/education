@@ -1,0 +1,18 @@
+package DAO;
+
+import java.util.ArrayList;
+
+import DTO.AccountDTO;
+import DTO.FeedDTO;
+
+public class AccountDAO {
+	private ArrayList<AccountDTO> list = new ArrayList<>();
+	
+	public void insert(AccountDTO acdto) {
+		list.add(acdto);
+	}
+	public void insertsample() {
+		list.add(new AccountDTO("abc", "abc", "ABCÃÊÄÝ¸´"));
+	}
+	
+}

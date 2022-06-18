@@ -1,0 +1,71 @@
+package com.kh.fb;
+
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+
+import org.apache.commons.dbcp2.BasicDataSource;
+
+import com.kh.cafe.copy.CafeDTO;
+
+
+
+public class FacebookDAO {
+	private BasicDataSource bds = new BasicDataSource();
+	private static FacebookDAO instance = null;
+	
+	private FacebookDAO() { //카페 생성자 private 설정
+		bds.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
+		bds.setUsername("kh");
+		bds.setPassword("kh");
+		// 커넷션 개수 셋팅
+		bds.setInitialSize(10);
+	}
+	
+	public static FacebookDAO getInstance() {//CafeDAO 인스턴스를 내부적으로 new 하고 반환하는 매서드
+		if(instance == null) {
+			// CafeDAO 인스턴스가 만들어진 적이 없다면 new를하겠다
+			// ==DBCP -> Connection pool을 하나 만들겠다
+			instance = new FacebookDAO();
+		}
+		//만일 CafeDAO 인스턴스가 이미 존재한다면 == 이미 만들어진 Connection pool이 존재
+		//그런경우라면 이미 있는 커넷션 풀을 통해서 접속을 제공
+		return instance;
+	}
+	
+	public Connection getConnection() throws Exception{
+		return bds.getConnection();
+	}
+	
+	
+	
+	public ArrayList<FacebookDTO> selectAll() throws Exception {
+		String sql = "select * from post_com";
+		try (Connection con = this.getConnection();
+				PreparedStatement stmt = con.prepareStatement(sql);) {
+			
+			ResultSet rs = stmt.executeQuery();
+			ArrayList<FacebookDTO> list = new ArrayList<>();
+			while (rs.next()) {
+				String Com = rs.getString(1);
+				String Nickname = rs.getString(2);
+				String Reporing_date = toJavaString(rs.getDate(3));
+				int No = rs.getInt(4);
+				list.add(new FacebookDTO(Com, Nickname, Reporing_date));
+			}
+			return list;
+		}
+	}
+	
+	public String toJavaString(Date date) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd HH:mm:ss");
+		String date_str = sdf.format(date);
+		return date_str;
+	}
+	
+}
+
+

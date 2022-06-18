@@ -1,0 +1,28 @@
+package com.kh.date02;
+
+import java.util.Scanner;
+
+import com.kh.date01.MemberDAO;
+
+public class Run {
+	public static void main(String[] args) throws Exception {
+		// 새로운 멤버 등로
+		// 등록된 멤버의 정보 조회
+		// id, pw, birth_date 모두 다 입력 받을 것.
+		Scanner sc = new Scanner(System.in);
+		MemberDAO dao = new MemberDAO();
+		System.out.print("id 입력 >> ");
+		String id = sc.nextLine();
+		System.out.print("pw 입력 >> ");
+		String pw = sc.nextLine();
+		System.out.print("생일 입력(예)19900101) >> ");
+		String birth_date = sc.nextLine(); 
+		
+		// String -> sql.Date 에 넣으려 하면 에러 (자료형 일치x)
+		MemberDTO dto = new MemberDTO(id,pw, birth_date);
+		dao.insert(dto);
+		
+		
+		
+	}
+}

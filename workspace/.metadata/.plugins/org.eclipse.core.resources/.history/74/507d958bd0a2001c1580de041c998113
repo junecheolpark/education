@@ -1,0 +1,164 @@
+package com.stdmanager.run;
+
+import java.util.Scanner;
+
+import com.stdmanager.dto.Student;
+
+public class asd {
+	public static void main(String[] args) {
+
+		Scanner sc = new Scanner(System.in);
+
+		Student[] stu = new Student[100];
+
+		int count = 0;
+
+		int no;
+
+		String name;
+
+		int age;
+
+		char gen;
+
+		while (true) {
+
+			System.out.println("==== 학생 정보 등록 ====");
+
+			System.out.println("메뉴를 선택하세요. (종료버튼 : q)\n");
+
+			System.out.println("1. 학생 정보 등록");
+
+			System.out.println("2. 학생 목록 확인");
+
+			System.out.println("3. 학생 정보 수정");
+
+			System.out.println("4. 학생 정보 삭제");
+
+			System.out.print(">> ");
+
+			String menu = sc.nextLine();
+
+			if (menu.equals("1")) {
+
+				if (count < stu.length) {
+
+					System.out.println("\n===== 학생 정보 등록 =====");
+
+					System.out.print("번호를 입력하세요 >> ");
+
+					no = Integer.parseInt(sc.nextLine());
+
+					System.out.print("이름을 입력하세요 >> ");
+
+					name = sc.nextLine();
+
+					System.out.print("나이를 입력하세요 >> ");
+
+					age = Integer.parseInt(sc.nextLine());
+
+					System.out.print("성별을 입력하세요(남/여) >> ");
+
+					gender = sc.nextLine().charAt(0);
+
+					stu[count++] = new Student(no, name, age, gender);
+
+				} else {
+
+					System.out.println("학생 정보 등록을 종료합니다.");
+
+					continue;
+
+				}
+
+			}
+
+			else if (menu.equals("2")) {
+
+				System.out.println("\n===== 학생 목록 확인 =====");
+
+				for (int i = 0; i < stu.length; i++) {
+
+					if (stu[i] != null) {
+
+						System.out.println(stu[i].printAll() + "\n");
+
+					}
+
+				}
+
+			}
+
+			else if (menu.equals("3")) {
+
+				System.out.println("\n===== 학생 정보 수정 =====");
+
+				System.out.print("수정할 학생의 번호를 입력하세요 >> ");
+
+				no = Integer.parseInt(sc.nextLine());
+
+				for (int i = 0; i < stu.length; i++) {
+
+					if (stu[i].getNo() == no) {
+
+						System.out.print("이름을 수정하세요 >> ");
+
+						name = sc.nextLine();
+
+						stu[i].setName(name);
+
+						System.out.print("나이를 수정하세요 >> ");
+
+						age = Integer.parseInt(sc.nextLine());
+
+						stu[i].setAge(age);
+
+						System.out.print("성별을 수정하세요(남/여) >> ");
+
+						gender = sc.nextLine().charAt(0);
+
+						stu[i].setGen(gender);
+
+						System.out.println("학생정보 수정이 완료되었습니다.\n");
+
+						break;
+
+					}
+
+				}
+
+			} else if (menu.equals("4")) {
+
+				System.out.println("\n===== 학생 정보 삭제 =====");
+
+				System.out.print("삭제할 학생의 번호를 입력하세요 >> ");
+
+				no = Integer.parseInt(sc.nextLine());
+
+				for (int i = 0; i < stu.length; i++) {
+
+					if (no == stu[i].getNo()) {
+
+						stu[i] = null;
+
+						System.out.println("학생정보가 삭제되었습니다.\n");
+
+						break;
+
+					}
+
+				}
+
+			} else if (menu.equals("q")) {
+
+				System.out.println("프로그램을 종료합니다.");
+
+				System.out.println("===== Bye Bye =====");
+
+				break;
+
+			}
+
+		}
+	}
+}

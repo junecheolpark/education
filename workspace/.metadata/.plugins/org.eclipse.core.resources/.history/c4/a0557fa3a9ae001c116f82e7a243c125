@@ -1,0 +1,12 @@
+package Run;
+
+public class Client {
+	public static void main(String[] args) {
+
+		System.out.print("==== 메뉴 선택 ====\r\n"
+				+ "1. 로그인\r\n"
+				+ "2. 회원가입\r\n"
+				+ "0. 프로그램 종료\r\n"
+				+ ">> ");
+	}
+}

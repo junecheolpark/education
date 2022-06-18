@@ -1,0 +1,14 @@
+package com.kh.member;
+
+public class MemberDAO {
+private BasicDataSource bds = new BasicDataSource();
+public MemberDAO() {
+	bds.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
+	bds.setUsername("kh");
+	bds.setPassword("kh");
+	bds.setInitialSize(10);
+}
+
+
+
+}

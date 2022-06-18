@@ -1,0 +1,81 @@
+package com.kh.student;
+
+import java.util.Scanner;
+
+
+
+
+
+public class Run {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		StudentDAO dao = new StudentDAO();
+		// == 카페 프로그램 ==
+		// 1. 메뉴등록(insert) 2. 메뉴 수정 update 3. 메뉴 삭제 delete 4. 메뉴 조회 select 5. 프로그램 종료
+		System.out.println("== 학생 프로그램 ==");
+		System.out.println("1. 메뉴등록 \n2. 메뉴 수정 \n3. 메뉴 삭제 \n4. 메뉴 조회 \n5. 프로그램 종료");
+		System.out.print(">> ");
+		int menu = Integer.parseInt(sc.nextLine());
+		
+		if(menu == 1) {
+			
+			try {
+				System.out.print("등록할 이름을 입력해 주세요 \n>> ");
+				String name = sc.nextLine();
+				System.out.print("등록할 번호를 입력해 주세요 \n>> ");
+				String phon = sc.nextLine();
+				System.out.print("등록할 날짜를 입력해 주세요 \n>> ");
+				String day = sc.nextLine();
+				int rs = dao.insert(name, phon);
+				if (rs > 0) {
+					System.out.println("데이터 입력 성공");
+				}else {
+					System.out.println("데이터 입력 실패");
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+				System.out.println("DB접속이 불안정 합니다.");
+			}
+		}else if(menu == 2) {
+			try {
+				int rs = dao.update();
+				if (rs > 0) {
+					System.out.println("수정 성공");
+				}else {
+					System.out.println("수정 실패");
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			
+		}else if(menu == 3) {
+			try {
+				int rs = dao.delete();
+				if( rs > 0) {
+					System.out.println("삭제 성공");
+				}else {
+					System.out.println("삭제 실패");
+				}
+				
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}else if(menu == 4) {
+			try {
+				String rs = dao.select();
+				if (rs != null) {
+					System.out.println(rs);
+				}else {
+					System.out.println("데이터 조회 실패");
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}else if(menu == 5) {
+		System.out.println("프로그램을 종료합니다");
+		}
+			
+		
+	}
+}
+	

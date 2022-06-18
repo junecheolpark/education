@@ -1,0 +1,17 @@
+package DAO;
+
+import java.util.ArrayList;
+
+import DTO.Member;
+
+public class MemberDAO {
+	private ArrayList<Member> list = new ArrayList<>();
+	
+	public void insert(Member dto) {//1¹ø
+		list.add(dto);
+	}
+	
+	
+	
+	
+}

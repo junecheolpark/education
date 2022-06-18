@@ -1,0 +1,21 @@
+1652317608447	Move 2 resources to 'WEB-INF'
+1652317616281	Rename resource 'index2.html'
+1652317627068	Rename resource 'input2.html'
+1652317673975	Move package
+1652317700663	Rename package 'com.kh.dao.copy'
+1652317708258	Rename package 'com.kh.dto.copy'
+1652317712801	Rename package 'com.kh.servlet.copy'
+1652318105038	Rename type 'WepDAO'
+1652318113158	Rename type 'WepDTO'
+1652320748774	Rename resource 'index.html'
+1652320752489	Rename resource 'input.html'
+1652320851744	Delete element
+1652321618113	Move 4 resources to 'webapp'
+1652321814611	Delete element
+1652336149952	Delete element
+1652336212215	Copy file
+1652346307135	Delete element
+1652346417584	Delete element
+1652346541362	Delete element
+1652346613942	Delete element
+1652346655058	Delete element

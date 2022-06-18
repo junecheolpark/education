@@ -1,0 +1,51 @@
+package com.kh.fb;
+
+public class Post_comDTO {
+	private String Com;
+	private String Nickname;
+	private String Reporing_date;
+	private int No;
+	
+	public Post_comDTO() {}
+	public Post_comDTO(String com, String nickname, String reporing_date, int no) {
+		super();
+		Com = com;
+		Nickname = nickname;
+		Reporing_date = reporing_date;
+		No = no;
+	}
+	public String getCom() {
+		return Com;
+	}
+	public void setCom(String com) {
+		Com = com;
+	}
+	public String getNickname() {
+		return Nickname;
+	}
+	public void setNickname(String nickname) {
+		Nickname = nickname;
+	}
+	public String getReporing_date() {
+		return Reporing_date;
+	}
+	public void setReporing_date(String reporing_date) {
+		Reporing_date = reporing_date;
+	}
+	public int getNo() {
+		return No;
+	}
+	public void setNo(int no) {
+		No = no;
+	}
+	@Override
+	public String toString() {
+		return Com + " : " + Nickname + " : " + Reporing_date + " : " + No;
+	}
+	
+	
+	
+	
+	
+	
+}

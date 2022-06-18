@@ -1,0 +1,37 @@
+package com.kh.member;
+
+import java.util.Scanner;
+
+public class Run {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner (System.in);
+		
+		while(true) {
+			System.out.print("** 멤버 서비스 프로그램 ** \r\n"
+					+ "1. 로그인\r\n"
+					+ "2. 회원가입\r\n"
+					+ "3. 회원탈퇴\r\n"
+					+ "4. 프로그램 종료 \n>> ");
+			int menu = Integer.parseInt(sc.nextLine());
+			
+			if(menu == 1) {//로그인
+				
+			}else if(menu == 2) {//회원가입
+				
+			}else if(menu == 3) {//회원탈퇴
+				
+			}else if(menu == 4) {
+				System.out.println("프로그램종료합니다");
+				break;
+			}
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+}

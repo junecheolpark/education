@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="java.lang.Double"/>
+    <fullyQualifiedTypeName name="Test_Kiosk"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="java.security.DomainCombiner"/>
+    <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+    <fullyQualifiedTypeName name="javazoom.jl.player.Player"/>
+    <fullyQualifiedTypeName name="com.stdmanager.dto.Student"/>
+    <fullyQualifiedTypeName name="java.io.FileWriter"/>
+    <fullyQualifiedTypeName name="com.oop.shop01.Product"/>
+    <fullyQualifiedTypeName name="com.netflix.dto.Member"/>
+    <fullyQualifiedTypeName name="com.netflix.dto.Premium"/>
+    <fullyQualifiedTypeName name="java.lang.reflect.Array"/>
+    <fullyQualifiedTypeName name="java.sql.Array"/>
+    <fullyQualifiedTypeName name="com.stdmanager.dao.StudentDAO"/>
+    <fullyQualifiedTypeName name="DTO.MemberShip"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="DTO.StudentDTO"/>
+    <fullyQualifiedTypeName name="com.stdmanager.dto.StudentDTO"/>
+    <fullyQualifiedTypeName name="java.lang.Exception"/>
+    <fullyQualifiedTypeName name="DTO.Membership"/>
+    <fullyQualifiedTypeName name="java.io.FileOutputStream"/>
+    <fullyQualifiedTypeName name="java.io.File"/>
+    <fullyQualifiedTypeName name="java.io.DataOutputStream"/>
+    <fullyQualifiedTypeName name="java.net.Socket"/>
+    <fullyQualifiedTypeName name="DTO.Basic"/>
+    <fullyQualifiedTypeName name="DTO.Standard"/>
+    <fullyQualifiedTypeName name="DTO.Premium"/>
+    <fullyQualifiedTypeName name="DTO.Member"/>
+    <fullyQualifiedTypeName name="DTO.FeedDTO"/>
+    <fullyQualifiedTypeName name="java.lang.StringIndexOutOfBoundsException"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
+    <fullyQualifiedTypeName name="java.lang.Integer"/>
+    <fullyQualifiedTypeName name="DTO.AccountDTO"/>
+</qualifiedTypeNameHistroy>

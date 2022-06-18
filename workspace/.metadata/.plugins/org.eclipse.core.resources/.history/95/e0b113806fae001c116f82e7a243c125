@@ -1,0 +1,19 @@
+package DAO;
+
+import java.util.ArrayList;
+
+import DTO.Member;
+
+public class MemberDAO {
+	private ArrayList<Member> list = new ArrayList<>();
+	
+	public void insert(Member dto) {//1번
+		list.add(dto);
+	}
+	public ArrayList selctAll() { //2번 출력
+		return list;
+	}
+	
+	
+	
+}

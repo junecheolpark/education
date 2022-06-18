@@ -1,0 +1,23 @@
+package DAO;
+
+import java.util.ArrayList;
+
+import DTO.Member;
+
+public class MemberDAO {
+	private ArrayList<Member> list = new ArrayList<>();
+	
+	public void insert(Member dto) {//1번
+		list.add(dto);
+	}
+	public ArrayList Output() { //2번 출력
+		return list;
+	}
+	public void selectById(String nickname) {
+		for(int i = 0; i<list.size(); i++) {
+			if(list.get(i).getNickname().equals(nickname)) {
+				System.out.println(list.get(i));
+	}
+	
+	
+}

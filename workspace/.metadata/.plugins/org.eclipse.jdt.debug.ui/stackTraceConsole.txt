@@ -1,0 +1,48 @@
+package com.oop.jukebox;
+
+import java.io.FileInputStream;
+import java.util.Scanner;
+
+import javazoom.jl.player.Player;
+
+public class Run {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("☆☆ 쥬크 박스 ☆☆");
+		System.out.println("플레이하고 싶은 음악을 선택해주세요.");
+		System.out.println("1. 삐~소리");
+		System.out.println("2. 슬로우모션");
+		System.out.println("3. 액션+쿵(편집)");
+		System.out.println("4. 프로그램종료");
+		System.out.print("음악선택 >>");
+		int input = Integer.parseInt(sc.nextLine());
+
+		try {
+			Player playMP3 = new Player;
+			FileInputStream fis = null;
+			if (input == 1) {
+				fis = new FileInputStream("D:\\VRGames - as long as you care [HSW0GI_BnB8].mp3");
+				System.out.println();
+			} else if (input == 2) {
+				fis = new FileInputStream("D:\\VRGames - H.O.T.-10-캔디 (Candy)-SM Best Album 2-128.mp3");
+				System.out.println();
+			} else if (input == 3) {
+				fis = new FileInputStream("D:\\VRGames -아이유-03-Blueming-Love poem-192.mp3");
+				System.out.println();
+			} else if (input == 4) {
+				System.out.println("쥬크박스를 종료합니다 goodbye>3<");
+			}
+			Player playMP3 = new Player(fis);
+		}catch(Exception e) {
+			e.printStakTrace();
+			System.out.println("음악을 재생하는데 실패했습니다.");
+			
+		}
+		
+		
+		}
+		
+		
+		
+	}
+

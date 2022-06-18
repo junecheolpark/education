@@ -1,0 +1,39 @@
+package Run;
+
+import java.util.Scanner;
+
+import DAO.AccountDAO;
+import DAO.FeedDAO;
+import DTO.AccountDTO;
+
+public class Client {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		AccountDAO acdao = new AccountDAO();
+		FeedDAO fdao = new FeedDAO();
+		acdao.insertsample();
+		
+		System.out.print("==== 메뉴 선택 ====\r\n" + "1. 로그인\r\n" + "2. 회원가입\r\n" + "0. 프로그램 종료\r\n" + ">> ");
+		int menu = Integer.parseInt(sc.nextLine());
+		
+		
+		while(true) {
+			if(menu == 1) {//로그인
+				
+			}else if(menu == 2) {//회원가입
+				System.out.print("==== 회원가입 ====\nID : ");
+				String id = sc.nextLine();
+				System.out.print("PW : ");
+				String pw = sc.nextLine();
+				System.out.print("NICKNAME : ");
+				String nickname = sc.nextLine();
+				acdao.insert(new AccountDTO(id, pw, nickname));
+			}else if(menu == 0) {//프로그램종료
+				break;
+			}
+		}
+		
+	}
+
+	
+}

@@ -1,0 +1,11 @@
+package DAO;
+
+import java.util.ArrayList;
+
+import DTO.AccountDTO;
+import DTO.FeedDTO;
+
+public class AccountDAO {
+	ArrayList<AccountDTO> acdto = new ArrayList<>();
+	ArrayList<FeedDTO> fdto = new ArrayList<>();
+}

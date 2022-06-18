@@ -1,0 +1,66 @@
+package com.kh.member;
+
+import java.util.Scanner;
+
+
+
+public class Run {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		MemberDAO dao = new MemberDAO();
+		while (true) {
+			System.out.print(
+					"** 멤버 서비스 프로그램 ** \r\n" + "1. 로그인\r\n" + "2. 회원가입\r\n" + "3. 회원탈퇴\r\n" + "4. 프로그램 종료 \n>> ");
+			int menu = Integer.parseInt(sc.nextLine());
+
+			if (menu == 1) {// 로그인
+				System.out.print("id 입력 >> ");
+				String id = sc.nextLine();
+				System.out.print("pw 입력 >> ");
+				String pw = sc.nextLine();
+				try{
+					String rs = dao.login(id, pw);
+					if (rs != null) {
+						System.out.println(rs + "님 환영합니다!");
+						System.out.println("오늘의 날씨는 흐림, 평균 온도는 12.5도입니다");
+					}else {
+						System.out.println("아이디 혹은 비밀번호가 일치하지 않습니다.");
+					}
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+
+				
+			} else if (menu == 2) {// 회원가입
+
+				System.out.print("id 입력 >> ");
+				String id = sc.nextLine();
+				System.out.print("pw 입력 >> ");
+				String pw = sc.nextLine();
+				System.out.print("nickname 입력 >> ");
+				String nickname = sc.nextLine();
+				MemberDTO dto = new MemberDTO(id, pw, nickname);
+				try {
+					int rs = dao.insert(dto);
+					if (rs > 0) {
+						System.out.println("회원가입 성공!");
+					} else {
+						System.out.println("회원가입 실패");
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+			} else if (menu == 3) {// 회원탈퇴
+				System.out.print("id 입력 >> ");
+				String id = sc.nextLine();
+				System.out.print("pw 입력 >> ");
+				String pw = sc.nextLine();
+			} else if (menu == 4) {
+				System.out.println("프로그램종료합니다");
+				break;
+			}
+		}
+
+	}
+}

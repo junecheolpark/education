@@ -1,0 +1,35 @@
+package com.kh.member;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+import org.apache.commons.dbcp2.BasicDataSource;
+
+public class MemberDAO {
+private BasicDataSource bds = new BasicDataSource();
+public MemberDAO() {
+	bds.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
+	bds.setUsername("kh");
+	bds.setPassword("kh");
+	bds.setInitialSize(10);
+}
+public Connection getConnection() throws Exception{
+	return bds.getConnection();
+}
+
+public int insert(MemberDTO dto)throws Exception {
+	String sql ="insert into member_tbl values(?, ?, ?)";
+	try(Connection con = this.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);){
+		pstmt.setString(1, dto.getId());
+		pstmt.setString(2, dto.getPw());
+		pstmt.setString(3, dto.getNickname());
+		int rs = pstmt.executeUpdate();
+		return rs;
+	}
+	
+}
+
+
+
+}

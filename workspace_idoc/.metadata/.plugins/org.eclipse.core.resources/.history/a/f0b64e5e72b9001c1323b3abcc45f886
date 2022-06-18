@@ -1,0 +1,51 @@
+package com.kh.student;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class StudentDAO {
+private String url = "jdbc:oracle:thin:@localhost:1521:xe"; 
+private String username = "kh";
+private String password = "kh";
+
+public int insert(String name,String phon,String day) throws Exception{
+	try(Connection con = DriverManager.getConnection(url, username, password);
+			Statement stmt = con.createStatement();){
+		String sql = "insert into tbl_student values(seq_std.nextval, '" + name +"', '"+ phon +"',to_date('"+day+"', 'yyyy,mm,dd'))";
+		int rs = stmt.executeUpdate(sql);
+		return rs;
+	}
+}
+	
+public int update(String name,String phon,String day, int no) throws Exception{
+	try(Connection con = DriverManager.getConnection(url, username, password);
+			Statement stmt = con.createStatement();){
+		String sql = "update tbl_student set name = '"+name+"', phon ='"+phon+"',birth_date = to_date('"+day+"', 'yyyy,mm,dd') where name = " +no;
+		int rs = stmt.executeUpdate(sql);
+		return rs;
+	}
+}
+public int delete(int no) throws Exception{
+	try(Connection con = DriverManager.getConnection(url, username, password);
+			Statement stmt = con.createStatement();){
+		String sql = "delete from tbl_student where no = " +no;
+		int rs = stmt.executeUpdate(sql);
+		return rs;
+	}
+}
+public String select() throws Exception{
+	try(Connection con = DriverManager.getConnection(url, username, password);
+			Statement stmt = con.createStatement();){
+		String data = null;
+		String sql = " select * from cafe where product_id = 1";
+		ResultSet rs =stmt.executeQuery(sql);
+		if(rs.next()) {
+			data = rs.getInt(1)+ rs.getString(2)+ rs.getString(3)+rs.getDate(4);
+		}
+		return data;
+	}
+}
+
+}

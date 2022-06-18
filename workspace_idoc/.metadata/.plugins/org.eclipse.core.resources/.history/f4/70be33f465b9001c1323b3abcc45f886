@@ -1,0 +1,22 @@
+package com.kh.student;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+
+public class StudentDAO {
+private String url = "jdbc:oracle:thin:@localhost:1521:xe"; 
+private String username = "kh";
+private String password = "kh";
+
+public int insert() throws Exception{
+	try(Connection con = DriverManager.getConnection(url, username, password);
+			Statement stmt = con.createStatement();){
+		String sql = "insert into tbl_student valaus(3, 'sam', '010-1111-1222',to_date('1986/02/03', 'yyyy,mm,dd'))";
+		int rs = stmt.executeUpdate(sql);
+		return rs;
+	}
+}
+	
+	
+}

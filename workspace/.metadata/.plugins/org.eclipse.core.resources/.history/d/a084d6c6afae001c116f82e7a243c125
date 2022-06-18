@@ -1,0 +1,47 @@
+package DAO;
+
+import java.util.ArrayList;
+
+import DTO.AccountDTO;
+import DTO.FeedDTO;
+
+public class AccountDAO {
+	private ArrayList<AccountDTO> list = new ArrayList<>();
+	
+	public void insert(AccountDTO acdto) {
+		list.add(acdto);
+	}
+	public void insertsample() {
+		list.add(new AccountDTO("abc", "abc", "ABCÃÊÄÝ¸´"));
+	}
+	/**/
+	public int same(String id, String pw, String nickname) {
+		for(int i = 0; i<list.size(); i++) {
+			if(list.get(i).getId().equals(id)){
+				return 1;
+			}else if(list.get(i).getPw().equals(pw)) {
+				return 2;
+			}else if(list.get(i).getNickname().equals(nickname)) {
+				return 3;
+			}
+		}return -1;
+	}
+	public int samePw(String pw) {
+		for(int i = 0; i<list.size(); i++) {
+			if(list.get(i).getPw().equals(pw)){
+				return 1;
+			}
+		}return -1;
+	}
+	public int sameNickname(String nickname) {
+		for(int i = 0; i<list.size(); i++) {
+			if(list.get(i).getNickname().equals(nickname)){
+				return 1;
+			}
+		}return -1;
+	}
+	/**/
+	
+	
+	
+}

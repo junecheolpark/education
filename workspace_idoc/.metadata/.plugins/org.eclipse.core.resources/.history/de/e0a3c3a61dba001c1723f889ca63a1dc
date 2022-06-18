@@ -1,0 +1,22 @@
+package com.kh.date01;
+
+import java.util.Scanner;
+
+public class Run {
+	public static void main(String[] args) {
+		// 새로운 멤버 등로
+		// 등록된 멤버의 정보 조회
+		// id, pw, birth_date 모두 다 입력 받을 것.
+		Scanner sc = new Scanner(System.in);
+		MemberDAO dao = new MemberDAO();
+		System.out.print("id 입력 >> ");
+		String id = sc.nextLine();
+		System.out.print("pw 입력 >> ");
+		String pw = sc.nextLine();
+		System.out.print("생일 입력(예)19900101) >> ");
+		String birth = sc.nextLine();
+		
+		MemberDTO dto = new MemberDTO(id, pw, birth);
+		dao.insert(dto);
+	}
+}

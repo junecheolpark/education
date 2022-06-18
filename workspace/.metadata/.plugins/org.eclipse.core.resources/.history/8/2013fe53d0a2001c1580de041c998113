@@ -1,0 +1,77 @@
+package com.stdmanager.run;
+
+import java.util.Scanner;
+
+import com.stdmanager.dto.Student;
+
+public class asd {
+	public static void main(String[] args) {
+
+		Scanner sc = new Scanner(System.in);
+		Student[] st = new Student[10];
+		int count = 0;
+
+		menu :while (true) {
+			System.out.println("==== 학생 관리 프로그램 ====");
+			System.out.println("메뉴를 선택하세요.(종료버튼:q) ");
+			System.out.println("1. 학생 정보 등록");
+			System.out.println("2. 학생 목록 확인");
+			System.out.println("3. 학생 정보 수정");
+			System.out.println("4. 학생 정보 삭제");
+
+			System.out.print("메뉴를 입력해 주세요.>> ");
+			String menu = sc.nextLine();
+
+			if (menu.equals("1")) {
+				if (count < st.length) {
+					System.out.print("번호를 입력하세요 >> ");
+					int no = Integer.parseInt(sc.nextLine());
+					System.out.print("이름을 입력하세요 >> ");
+					String name = sc.nextLine();
+					System.out.print("나이를 입력하세요 >> ");
+					int age = Integer.parseInt(sc.nextLine());
+					System.out.print("성별을 입력하세요(남/여) >> ");
+					char gen = sc.next().charAt(0);
+
+					st[count] = new Student(no, name, age, gen);
+					System.out.println(st[count].toString());
+					count++;
+				} else {
+					System.out.println("등록을 종료 하겠습니다.");
+					continue;
+				}
+			} else if (menu.equals("2")) {
+				for (int i = 0; i < st.length; i++) {
+					if (st[i] != null) {
+						System.out.println(st[count].toString());
+					}
+
+				}
+
+			} else if (menu.equals("3")) {
+				System.out.print("인터럴스 입력하시오 >> ");
+				int input = Integer.parseInt(sc.nextLine());
+				System.out.print("번호를 입력하세요 >> ");
+				int no = Integer.parseInt(sc.nextLine());
+				System.out.print("이름을 입력하세요 >> ");
+				String name = sc.nextLine();
+				System.out.print("나이를 입력하세요 >> ");
+				int age = Integer.parseInt(sc.nextLine());
+				System.out.print("성별을 입력하세요(남/여) >> ");
+				char gen = sc.next().charAt(0);
+				st[input] = new Student(no, name, age, gen);
+				System.out.println(st[input].toString());
+
+			} else if (menu.equals("4")) {
+
+				System.out.print("번호를 입력하세요 >> ");
+				int input1 = Integer.parseInt(sc.nextLine());
+				st[input1] = null;
+
+			}else if (menu.equals("5")) {
+				System.out.println("등록을 종료합니다."); break menu;
+				
+			}
+		}
+	}
+}
